@@ -1,6 +1,9 @@
 from setuptools import setup
+import os 
 
-with open("README", 'r') as f:
+ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
+
+with open(os.path.join(ROOT_PATH, "README"), 'r') as f:
     long_description = f.read()
 
 setup(
