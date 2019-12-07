@@ -1,0 +1,60 @@
+language: python
+
+jobs:
+  include:
+    - python: "3.5"
+      services: docker
+      
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.5.4
+        - export PATH="/c/Python35:/c/Python35/Scripts:$PATH"
+    
+    - python: "3.6"
+      services: docker
+
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.6.8
+        - export PATH="/c/Python36:/c/Python36/Scripts:$PATH"
+    
+    - python: "3.7"
+      services: docker
+
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.7.5
+        - export PATH="/c/Python37:/c/Python37/Scripts:$PATH"
+
+    - python: "3.8"
+      services: docker
+
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.8.0
+        - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+
+        
+env:
+  global:
+    - PYTHONPATH="$TRAVIS_BUILD_DIR/pycope"
+    - TWINE_USERNAME=jawaff
+      # Note: TWINE_PASSWORD is set in Travis settings
+
+install:
+  - python -m pip install --upgrade pip
+  - python -m pip install -r requirements.txt
+
+script:
+  - python -m pytest
+  # build the wheels, put them into './wheelhouse'
+  - python -m cibuildwheel --output-dir wheelhouse
+
+after_success:
+  # if the release was tagged, upload them to PyPI
+  - if [[ $TRAVIS_TAG ]]; then python -m twine upload wheelhouse/*.whl; fi
+  # - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*

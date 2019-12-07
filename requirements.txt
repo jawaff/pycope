@@ -1,0 +1,6 @@
+immutables==0.11
+cibuildwheel==1.0.0
+twine
+setuptools
+wheel
+pytest
