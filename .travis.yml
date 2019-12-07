@@ -1,17 +1,37 @@
 language: python
-python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"      # current default Python on Travis CI
-  - "3.7"
-  - "3.8"
 
 jobs:
   include:
-    # perform a linux build
-    - services: docker
-    # and a windows build
+    - python: "3.5"
+      services: docker
+      
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.5.4
+        - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+    
+    - python: "3.6"
+      services: docker
+
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.6.8
+        - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+    
+    - python: "3.7"
+      services: docker
+
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.7.5
+        - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+
+    - python: "3.8"
+      services: docker
+
     - os: windows
       language: shell
       before_install:
