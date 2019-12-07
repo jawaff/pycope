@@ -15,17 +15,16 @@ jobs:
         - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
 
 install:
-  - python -m pip install pipenv
-  - python -m pipenv install --dev
+  - python -m pip install -r requirements.txt
 
 script:
-  - pipenv run pytest
+  - python -m pytest
   # build the wheels, put them into './wheelhouse'
-  - pipenv run cibuildwheel --output-dir wheelhouse
+  - python -m cibuildwheel --output-dir wheelhouse
 
 after_success:
   # if the release was tagged, upload them to PyPI
-  - if [[ $TRAVIS_TAG ]]; then pipenv run twine upload wheelhouse/*.whl; fi
+  - if [[ $TRAVIS_TAG ]]; then python -m twine upload wheelhouse/*.whl; fi
   # - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
 deploy:
