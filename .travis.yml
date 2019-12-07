@@ -1,0 +1,37 @@
+language: python
+
+jobs:
+  include:
+    # perform a linux build
+    - services: docker
+    # and a mac build
+    - os: osx
+      language: shell
+    # and a windows build
+    - os: windows
+      language: shell
+      before_install:
+        - choco install python --version 3.8.0
+        - export PATH="/c/Python38:/c/Python38/Scripts:$PATH"
+
+install:
+  - python -m pip install pipenv
+  - python -m pipenv install --dev
+
+script:
+  - py.test
+  # build the wheels, put them into './wheelhouse'
+  - python -m cibuildwheel --output-dir wheelhouse
+
+after_success:
+  # if the release was tagged, upload them to PyPI
+  - if [[ $TRAVIS_TAG ]]; then python -m twine upload wheelhouse/*.whl; fi
+  # - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
+
+deploy:
+  provider: pypi
+  user: jawaff
+  password:
+    secure: PT5zLwIgr6RoOzwgrkb2LRX8F+v8cDcKZQmp6pkechypvV15FBI/Q5WWe9kyktu6ott+aSrJPpiN+8Ao8/IQyFm79M6bmTuNYyjb3HCN0+VtN3Jjs7jTUSskhUvmmH3fq1HZMi81QcFHtRWwo2DY4gdiPs8qEBOPFqU1kXs8YQSSD90yKfA+5KojnaiEyJIf7MoZbxqPopJllqS5lub+YzlK2OkGdn+YBUtrbSaLYwMTn1ZhLZQlXiA/4Kh5D/Uo7u/xHqFXsF79tu2XMk3upmY1kFppie3RWdPU+ZDk6c29NVASEmpUyvp2leOP6ZOw/eBQcHNTmlFJ3u6i4J2jJL6cSPrV0pmtfsFnxSJFsYtXsVGtyZo1I9UK44bPB76R0dk6KeclTRcrL6XUDxLNiwpovWfNLtbkFE+UdaQCdoAkmqbyOtYKUMDrI/vTAbSwv5Lr3xJUGPMH99HjEecdUNEPi/a3eCOdi0PF6WOxYROFRabzNKH7BZvvzkLAMsdw1znnZ0FwzZOvYO+ozMbQ/HH0h7RReX/7V1alHxk0sqbWtZz/bUri3sYafbbMJly0LQJSBzC77xFqV0k0I/XWdWHzmYawC+TVowP5qKlImeVJGygkzjf0pfKhib3dQaU+pMkUcBstTF+M3y/uWrI58fsuXbcBBCYOfJ8gWNWUDAE=
+  on:
+    branch: master

@@ -6,7 +6,7 @@ with open("README", 'r') as f:
 setup(
    name='pycope',
    version='1.0',
-   license="MIT",
+   license="Apache2",
    description='Tools for Context-Oriented Programming.',
    author='Jacob Waffle',
    author_email='thejakewaffle@gmail.com',

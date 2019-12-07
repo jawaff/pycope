@@ -4,6 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+cibuildwheel = "==1.0.0"
+twine = "*"
+setuptools = "*"
+wheel = "*"
 pytest = "*"
 
 [packages]
