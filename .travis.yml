@@ -50,7 +50,8 @@ install:
   - python -m pip install -r requirements.txt
 
 script:
-  - python -m pytest
+  - python -m pytest --cov=./
+  - codecov
   # build the wheels, put them into './wheelhouse'
   - python -m cibuildwheel --output-dir wheelhouse
 
