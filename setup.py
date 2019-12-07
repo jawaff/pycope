@@ -1,11 +1,10 @@
-import pathlib
 from setuptools import setup
+import os
 
-# The directory containing this file
-HERE = pathlib.Path(__file__).parent
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# The text of the README file
-README = (HERE / "README.md").read_text()
+with open(os.path.join(ROOT_DIR, "README.md"), 'r') as file:
+    README = file.read()
 
 setup(
     name='pycope',
