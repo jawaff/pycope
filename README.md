@@ -46,10 +46,10 @@ boilerplate for the user whilst still allowing flexibility and power.
 
 # Example
 ```python
-import context
-import strategy
-import prioritizers
-import executable
+from pycope import context
+from pycope import strategy
+from pycope import prioritizers
+from pycope import executable
 
 def is_red(red, green, blue):
     return red > 50 and green < 30 and blue < 30:
