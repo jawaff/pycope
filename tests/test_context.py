@@ -35,18 +35,18 @@ def test_context_layers():
 
 def test_context_elect_strategy():
     ctx = context.Context()
-    strategies = [strategy.Strategy(lambda x: x, [prioritizers.contains_key("name1")]),
-                  strategy.Strategy(lambda x: x, [prioritizers.contains_key("name2")])]
+    strategies = [strategy.Strategy(lambda x: "{}_1".format(x), [prioritizers.contains_key("name1")]),
+                  strategy.Strategy(lambda x: "{}_2".format(x), [prioritizers.contains_key("name2")])]
     
     with layer.Layer(ctx, {"name1":"value1"}, []) as layer1:
         strategy1 = ctx.elect_strategy(strategies)
-        assert strategy1.execute("entering layer1") == "entering layer1"
+        assert strategy1.execute("entering layer1") == "entering layer1_1"
         with layer.Layer(ctx, {"name2":"value2"}, ["name1"]) as layer2:
             strategy2 = ctx.elect_strategy(strategies)
-            assert strategy2.execute("entering layer2") == "entering layer2"
+            assert strategy2.execute("entering layer2") == "entering layer2_2"
         
         strategy2 = ctx.elect_strategy(strategies)
-        assert strategy2.execute("back in layer1") == "back in layer1"
+        assert strategy2.execute("back in layer1") == "back in layer1_1"
 
 def test_context_shared_instance():
     ctx = context.Context.shared_instance()
