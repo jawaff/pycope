@@ -56,6 +56,6 @@ script:
   - python setup.py sdist --dist-dir dist
 
 after_success:
-  # if the release was tagged, upload them to PyPI
-  - if [[ $TRAVIS_TAG ]]; then python -m twine upload dist/*; fi
+  # If the release was tagged, we're on linux and using python 3.8, then upload them to PyPI.
+  - if [[ $TRAVIS_TAG ]] && [ "$TRAVIS_OS_NAME" = "linux" ] && ["$TRAVIS_PYTHON_VERSION" = "3.8"]; then python -m twine upload dist/*; fi
   # - twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
