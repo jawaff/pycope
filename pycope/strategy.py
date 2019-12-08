@@ -1,3 +1,5 @@
+# Copyright 2019 Jake Waffle. Subject to the Apache2 license.
+
 class Strategy(object):
     def __init__(self, executable, field_prioritizers=[]):
         """

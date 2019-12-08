@@ -1,3 +1,5 @@
+# Copyright 2019 Jake Waffle. Subject to the Apache2 license.
+
 import strategy
 
 def test_strategy_init():

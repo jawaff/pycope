@@ -6,7 +6,12 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-immutables = "*"
+immutables = "==0.11"
+cibuildwheel = "==1.0.0"
+twine = "*"
+pytest = "*"
+pytest-cov = "*"
+codecov = "*"
 
 [requires]
 python_version = "3.8"
