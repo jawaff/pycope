@@ -1,3 +1,5 @@
+# Copyright 2019 Jake Waffle. Subject to the Apache2 license.
+
 import prioritizers
 
 def test_contains_key():

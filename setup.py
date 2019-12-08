@@ -8,7 +8,7 @@ with open(os.path.join(ROOT_DIR, "README.md"), 'r') as file:
 
 setup(
     name='pycope',
-    version='0.1.0',
+    version='0.1.1',
     license="Apache2",
     description='A Context-Oriented Programming Extension for Python.',
     long_description=README,

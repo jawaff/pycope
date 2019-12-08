@@ -1,3 +1,5 @@
+# Copyright 2019 Jake Waffle. Subject to the Apache2 license.
+
 class Layer(object):
     def __init__(self, context, fields_to_add={}, fields_to_remove=[]):
         """

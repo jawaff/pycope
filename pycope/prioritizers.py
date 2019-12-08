@@ -1,3 +1,5 @@
+# Copyright 2019 Jake Waffle. Subject to the Apache2 license.
+
 def contains_key(key):
     return lambda fields: 1 if key in fields else 0
 
